@@ -138,7 +138,6 @@ public class Home extends JFrame {
         pack();
     }
 
-
     private void searchAction(ActionEvent evt) {
         map.removeAllMarkers();
         String category, location;
