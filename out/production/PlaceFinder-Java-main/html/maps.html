@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no"/>
+        <style type="text/css">
+            html { height: 100% }
+            body { height: 100%; margin: 0; padding: 0 }
+            #map-canvas { height: 100% }
+            #content {
+                padding: 8px;
+            }
+            #bodyContent {
+                font-size: 15px;
+            }
+            .bold {
+                font-weight: 500;
+            }
+            .grid-container {
+                display: grid;
+                grid-template-columns: auto auto;
+                gap: 10px;
+            }
+            .grid-container > div {
+                border: 1px solid black;
+                padding: 8px
+            }
+            .card {
+                font-size: 14px;
+            }
+            .author {
+                display: flex;
+                align-items: center;
+            }
+        </style>
+        <script type="text/javascript"
+        src="https://maps.googleapis.com/maps/api/js?key=API_KEY&callback=initMap" async defer></script>
+        <script type="text/javascript">
+            var map;
+            let markers = [];
+            let markerCluster;
+            const myLatLng = {lat: 23.810331, lng: 90.412521};
+            function initMap() {
+                map = new google.maps.Map(document.getElementById("map-canvas"), {
+                    zoom: 15,
+                    center: myLatLng
+                });
+
+            }
+
+            function setCenter(myLat, myLng, zoomLevel) {
+                map = new google.maps.Map(document.getElementById("map-canvas"), {
+                    zoom: zoomLevel,
+                    center: {lat: myLat, lng: myLng},
+                });
+
+            }
+            function setMapOnAll(map) {
+                for (let i = 0; i < markers.length; i++) {
+                    markers[i].setMap(map);
+                }
+            }
+            function deleteMarker(label) {
+                for (var i = 0; i < markers.length; i++) {
+                    if (markers[i].label == label) {
+                        markers[i].setMap(null);
+                        markers.splice(i, 1);
+                        return;
+                    }
+                }
+            }
+            function clearMarkers() {
+                setMapOnAll(null);
+            }
+            function deleteMarkers() {
+                clearMarkers();
+                markers = [];
+            }
+
+            function addMarker(markerInfo, coords, openingHours, reviews) {
+                let openingHoursString = 'Closed Now';
+                if (openingHours && openingHours.open_now) {
+                    openingHoursString = 'Open Now';
+                }
+
+                let reviewsString = '<div>No Reviews Yet.</div>';
+                if (reviews) {
+                    reviewsString = '<div class="grid-container">';
+                    (reviews || []).slice(0, 2).map(review => {
+                        reviewsString += `<div class="card">
+                                            <div class="author">
+                                                <img src="${review.profile_photo_url}" width="30" height="30">
+                                                <div class="bold" style={{margin-left: 12px}}>${review.author_name || 'N/A'}</div>
+                                            </div>
+                                            <p><span class="bold">Review:</span> ${review.text || 'N/A'}</p>
+                                            <p><span class="bold">Rating:</span> ${review.rating || 'N/A'}</p>
+                                            <p><span class="bold">Time:</span> ${review.relative_time_description || 'N/A'}</p>
+                                        </div>`
+                    });
+                    reviewsString += '</div>';
+                }
+                const contentString = `<div id="content">
+                                        <h1 id="firstHeading" class="firstHeading">${markerInfo.name}</h1>
+                                        <div id="bodyContent">
+                                            <p><span class="bold">Address:</span> ${markerInfo.formatted_address}</p>
+                                            <p><span class="bold">Business Status:</span> ${markerInfo.business_status}</p>
+                                            <p><span class="bold">Phone Number:</span> ${markerInfo.formatted_phone_number}</p>
+                                            <p><span class="bold">Intl. Phone Number:</span> ${markerInfo.international_phone_number}</p>
+                                            <p><span class="bold">Opening Hours:</span> ${openingHoursString}</p>
+                                            <p><span class="bold">Rating:</span> ${markerInfo.rating}</p>
+                                            <p><span class="bold">Total Number of Ratings:</span> ${markerInfo.user_ratings_total}</p>
+                                            <p><span class="bold">Website:</span> ${markerInfo.website || 'N/A'}</p>
+                                        </div>
+                                        <h2>Reviews</h2>
+                                        ${reviewsString}
+                                       </div>`;
+                const infowindow = new google.maps.InfoWindow({
+                    content: contentString,
+                });
+                const marker = new google.maps.Marker({
+                    position: {lat: Number(coords.lat), lng: Number(coords.lng)},
+                    map: map
+                });
+                marker.addListener("click", () => {
+                    infowindow.open(map, marker);
+                });
+                markers.push(marker);
+            }
+        </script>
+
+    </head>
+    <body>
+        <div id="map-canvas"></div>
+    </body>
+</html>
