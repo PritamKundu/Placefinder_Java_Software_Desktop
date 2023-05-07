@@ -135,6 +135,7 @@ public class Home extends JFrame {
                                 .addGap(14, 14, 14))
         );
 
+
         pack();
     }
 
