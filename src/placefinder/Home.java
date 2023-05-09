@@ -137,6 +137,7 @@ public class Home extends JFrame {
         pack();
     }
 
+
     private void searchAction(ActionEvent evt) {
         map.removeAllMarkers();
         String category, location;
@@ -147,6 +148,7 @@ public class Home extends JFrame {
             JOptionPane.showMessageDialog(null,"Please enter a location", "Error", JOptionPane.WARNING_MESSAGE);
             return ;
         }
+
 
         var results = this.searchLocation(location, category.toLowerCase().replace(' ', '_'));
 
