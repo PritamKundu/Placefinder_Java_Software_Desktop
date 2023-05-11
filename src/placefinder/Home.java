@@ -156,6 +156,7 @@ public class Home extends JFrame {
         }
 
         map.addMarkersToMap(results);
+
     }
 
     private ArrayList<Location> searchLocation(String address, String types) {
