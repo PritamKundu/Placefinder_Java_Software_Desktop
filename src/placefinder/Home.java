@@ -156,7 +156,6 @@ public class Home extends JFrame {
             JOptionPane.showMessageDialog(null,"No results found for this criteria", "Error", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
         map.addMarkersToMap(results);
 
     }
