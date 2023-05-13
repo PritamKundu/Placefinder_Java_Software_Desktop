@@ -159,6 +159,7 @@ public class Home extends JFrame {
 
     }
 
+
     private ArrayList<Location> searchLocation(String address, String types) {
         ArrayList<Location> result = new ArrayList<>();
         try {
