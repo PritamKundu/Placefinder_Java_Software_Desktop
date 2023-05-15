@@ -164,6 +164,7 @@ public class Home extends JFrame {
         try {
             var client = HttpClient.newHttpClient();
 
+
             var request = HttpRequest.newBuilder(
                     URI.create("https://maps.googleapis.com/maps/api/place/textsearch/json?key=API_KEY&radius=5000&query=" + address + "&types=" + types))
                 .header("accept", "application/json")
