@@ -149,7 +149,6 @@ public class Home extends JFrame {
             return ;
         }
 
-
         var results = this.searchLocation(location, category.toLowerCase().replace(' ', '_'));
 
         if (results.isEmpty()) {
