@@ -155,7 +155,6 @@ public class Home extends JFrame {
             return;
         }
 
-
         map.addMarkersToMap(results);
     }
 
