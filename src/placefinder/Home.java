@@ -172,6 +172,7 @@ public class Home extends JFrame {
 
             var api = client.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());
 
+
             var res = api.body();
             ObjectMapper mapper = new ObjectMapper();
             Response response = mapper.readValue(res, Response.class);
