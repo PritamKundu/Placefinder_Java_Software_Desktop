@@ -147,7 +147,6 @@ public class Home extends JFrame {
             JOptionPane.showMessageDialog(null,"Please enter a location", "Error", JOptionPane.WARNING_MESSAGE);
             return ;
         }
-
         var results = this.searchLocation(location, category.toLowerCase().replace(' ', '_'));
 
         if (results.isEmpty()) {
