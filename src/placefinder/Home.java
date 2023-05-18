@@ -134,6 +134,7 @@ public class Home extends JFrame {
                                 .addComponent(mapsPanel, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
                                 .addGap(14, 14, 14))
         );
+
         pack();
     }
 
