@@ -167,6 +167,7 @@ public class Home extends JFrame {
                 .header("accept", "application/json")
                 .build();
 
+
             var api = client.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());
 
             var res = api.body();
