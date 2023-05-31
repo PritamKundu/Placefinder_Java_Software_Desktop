@@ -162,14 +162,12 @@ public class Home extends JFrame {
         ArrayList<Location> result = new ArrayList<>();
         try {
             var client = HttpClient.newHttpClient();
-
             var request = HttpRequest.newBuilder(
                     URI.create("https://maps.googleapis.com/maps/api/place/textsearch/json?key=API_KEY&radius=5000&query=" + address + "&types=" + types))
                 .header("accept", "application/json")
                 .build();
 
             var api = client.send(request, java.net.http.HttpResponse.BodyHandlers.ofString());
-
 
             var res = api.body();
             ObjectMapper mapper = new ObjectMapper();
