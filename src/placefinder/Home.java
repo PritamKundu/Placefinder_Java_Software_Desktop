@@ -121,7 +121,6 @@ public class Home extends JFrame {
                                 .addContainerGap(14, Short.MAX_VALUE))
         );
 
-
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
 
